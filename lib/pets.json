@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "Rocky",
+    "class": "dog"
+  },
+  {
+    "id": "2",
+    "name": "Sombra",
+    "class": "rabbit"
+  },
+  {
+    "id": "3",
+    "name": "Shadow",
+    "class": "horse"
+  },
+  {
+    "id": "4",
+    "name": "Tesla",
+    "class": "cat"
+  }
+]

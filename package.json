@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-winston-log-api",
+  "version": "1.0.0",
+  "description": "Demo API with Winston Logging Simple",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apigee"
+  ],
+  "author": "Diego Zuluaga",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.3",
+    "express-winston": "^0.3.0",
+    "morgan": "^1.5.2",
+    "request": "^2.55.0",
+    "winston": "^1.0.0",
+    "winston-loggly": "^1.1.0"
+  }
+}
