@@ -3,7 +3,7 @@ This tutorial provides a reference architecture for enabling APIs with Logging b
 
 ![Log Management for Modern APIs](https://www.dropbox.com/s/70g4kiyde2nwwt4/Log%20Management%20for%20Modern%20APIs.png?dl=1)
 
-In the previous diagram an API Proxy in Apigee leverages a Log Management solution to log events. Apigee API Proxies can leverage standard Node.js libraries such as [Winston](https://github.com/winstonjs/winston) or [Bunyan](https://github.com/trentm/node-bunyan) to log entries in an async fashion, so there's little impact on latency.
+In the previous diagram, an API Proxy in Apigee leverages a Log Management solution to log events. Apigee API Proxies can leverage standard Node.js libraries such as [Winston](https://github.com/winstonjs/winston) or [Bunyan](https://github.com/trentm/node-bunyan) to log entries in an async fashion, so there's little impact on latency.
 
 #### 1. How to deploy this API Proxy
 We will be leveraging [apigeetool](https://www.npmjs.com/package/apigeetool) to bundle and deploy it to Apigee Edge. You'll need to sign up for a Free Apigee Edge account [here](https://accounts.apigee.com/accounts/sign_up).
@@ -13,10 +13,10 @@ $ apigeetool deploynodeapp --username $ae_username --password $ae_password --org
 ```
 
 #### 2. Enabling Winston
-All steps included in this how-to-guide are standard to Winston configuration available [here](https://github.com/winstonjs/winston), including (Winston-Loggly)[https://github.com/winstonjs/winston-loggly], which a Winston transporter for Loggly. So, there's nothing specific about Apigee to support it, except that Apigee requires to import Node.js Apps as Apigee API Proxy bundles, which is explained in How to deploy this API Proxy section.
+All steps included in this how-to-guide are standard to Winston configuration available [here](https://github.com/winstonjs/winston), including (Winston-Loggly)[https://github.com/winstonjs/winston-loggly], which a Winston transporter for Loggly. So, there's nothing specific about Apigee to support it, except that Apigee requires importing Node.js Apps as Apigee API Proxy bundles, which is explained in How to deploy this API Proxy section.
 
 #### 3. Configurating config-logger.js
-config-logger.js contains transporters. In our case file, console, and loggly. More transporters can be added and configured using values from KVMs. See LOGGER_FILE_JSON. Notice that it is required a token in order to authenticate with Loggly. This token is included as part of the configuration, however it can also be specified as a KVM entry. Please consult Loggly [official documentation](https://www.loggly.com/docs/customer-token-authentication-token/) for further information about retrieving customer token.
+config-logger.js contains transporters. In our case file, console, and loggly. More transporters can be added and configured using values from KVMs. See LOGGER_FILE_JSON. Notice that it is required a token in order to authenticate with Loggly. This token is included as part of the configuration. However, it can also be specified as a KVM entry. Please consult Loggly [official documentation](https://www.loggly.com/docs/customer-token-authentication-token/) for further information about retrieving customer token.
 
 ```javascript
 transports : [
@@ -46,18 +46,18 @@ We will generate two types of exceptions. Custom and ReferenceError Exceptions. 
 
 ```javascript
 app.get('/pets', function(req, res){
-	  logger.info('access to /pets resource');
-	  if(req.query.error === 'code_raised'){ // raised exception
-	    logger.error("Error raised by an exception");
-	    throw new Error("Raised by an exception!")
-	  }else if(req.query.error === 'reference'){ //invalid function
-	    foo();
-	  }
-	  res.json(pets);
+      logger.info('access to /pets resource');
+      if(req.query.error === 'code_raised'){ // raised exception
+        logger.error("Error raised by an exception");
+        throw new Error("Raised by an exception!")
+      }else if(req.query.error === 'reference'){ //invalid function
+        foo();
+      }
+      res.json(pets);
 });
 ```
 
-```/pets?error=code_raised``` will raise an exception by explicitly throwing the exception and ```/pets?error=reference``` will raise a refence error.
+```/pets?error=code_raised``` will raise an exception by explicitly throwing the exception and ```/pets?error=reference``` will raise a reference error.
 
 #### 5. Throwing an explicit exception
 This exception is raised by the following code in /pets route.
@@ -72,7 +72,7 @@ $ curl http://{org}-{env}.apigee.net/tutorial-loggly-api-proxy/pets?error=code_r
 ```
 
 #### 6. Generate an exception by Reference Error
-Since foo function doesn't exist a Reference Error exception will be generated.
+Since foo function doesn't exist, a Reference Error exception will be generated.
 ```bash
 $ curl http://testmyapi-test.apigee.net/tutorial-loggly-api-proxy/pets?error=reference
 curl http://{org}-{env}.apigee.net/tutorial-loggly-api-proxy/pets?error=reference
