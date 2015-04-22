@@ -4,11 +4,11 @@ var express = require('express'),
     apigee = require('apigee-access'),
     pets = require('./lib/petsController');
     petsJSON = require('./lib/pets.json'),
-    config_logger = require('./lib/config-logger.js');
+    config_logger = require('./config/config-logger.js');
 
 function loadLogger(req, res, next){
-  var logger = require('./lib/logger')
-  logger = new logger(config_logger.getTransportOptions(req));
+  var logger = require('llbean-winston-logger');
+  var logger = new logger(config_logger.getTransportOptions(req));
   res.locals.logger = logger;
   next();
 }
@@ -16,6 +16,7 @@ function loadLogger(req, res, next){
 app.get('/pets', loadLogger, pets.getPets);
 
 app.use(function(err, req, res, next) {
+  console.log(err.stack)
   var messageid = apigee.getVariable(req, "messageid") || 'LOCAL';
   res.locals.logger.error("messageid : " + messageid + ' - ' + err + " - " + err.stack);
   res.status(500).json({message : "Woops! Looks like something broke!", "type" : "ERROR-0001", messageid: messageid});

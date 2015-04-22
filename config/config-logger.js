@@ -16,11 +16,13 @@ module.exports = {
               }),
               new winston.transports.Console({
                 "level": "info",
+                //**retrieve values from KVM or Apigee Vault
                 "json": apigee.getVariable(req, 'LOGGER_CONSOLE_JSON') === 'true',
                 "colorize": true
               }),
               new Loggly({
                 "subdomain": apigee.getVariable(req, 'LOGGER_LOGGLY_SUBDOMAIN') || "dzuluaga.loggly.com",
+                //**retrieve values from KVM or Apigee Vault
                 "token": apigee.getVariable(req, 'LOGGER_LOGGLY_TOKEN') || "XXXXX-XXXXX-XXXX-XXXXX",
                 "tags": "pets"
               })

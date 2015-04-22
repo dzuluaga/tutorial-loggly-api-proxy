@@ -9,8 +9,9 @@ In the previous diagram, an API Proxy in Apigee leverages a Log Management solut
 We will be leveraging [apigeetool](https://www.npmjs.com/package/apigeetool) to bundle and deploy it to Apigee Edge. You'll need to sign up for a Free Apigee Edge account [here](https://accounts.apigee.com/accounts/sign_up).
 
 ```bash
-$ apigeetool deploynodeapp --username $ae_username --password $ae_password --organization testmyapi --api tutorial-loggly-api-proxy --environment test --directory . -m app.js -b /tutorial-loggly-api-proxy
-```
+apigeetool deploynodeapp --username $ae_username --password $ae_password --organization testmyapi --api tutorial-loggly-api-proxy --environment test --directory . -m app.js -b /tutorial-loggly-api-proxy -U```
+
+**This API proxy contains a dependency to a logger module, which can be resolved by following the recommendation from [this repo](https://github.com/llbeaninc/llbean-winston-logger), also note that -U flag will upload modules.**
 
 #### 2. Enabling Winston
 All steps included in this how-to-guide are standard to Winston configuration available [here](https://github.com/winstonjs/winston), including (Winston-Loggly)[https://github.com/winstonjs/winston-loggly], which a Winston transporter for Loggly. So, there's nothing specific about Apigee to support it, except that Apigee requires importing Node.js Apps as Apigee API Proxy bundles, which is explained in How to deploy this API Proxy section.
@@ -99,3 +100,6 @@ app.use(function(err, req, res, next) {
 All entries will be available through Loggly Dashboard. Log entries are searchable by tags and messageid.
 
 ![Loggly Dashboard](https://www.dropbox.com/s/o9yd1zg7utcew5c/Loggly_Dashboard.png?dl=1)
+
+#### 9. Leveraging dynamic values from Apigee Vault or KVMs
+The goal is to enable each API proxy with configuration that can be changed during runtime. In this way DevOps can switch configuration without having to redeploy the API proxy. For instance switching debug level from info to debug is a matter of switching the configuration from a common location such as an Apigee Vault or a KVM entry. These changes can be applied through the file /config/config-logger.js, e.g. ```"token": apigee.getVariable(req, 'LOGGER_LOGGLY_TOKEN') || "XXXXX-XXXXX-XXXX-XXXXX"```.
