@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [tutorial-loggly-api-proxy](#tutorial-loggly-api-proxy)
+      - [1. How to deploy this API Proxy](#1-how-to-deploy-this-api-proxy)
+      - [2. Enabling Winston](#2-enabling-winston)
+      - [3. Configurating config-logger.js](#3-configurating-config-loggerjs)
+      - [4. How to test it](#4-how-to-test-it)
+      - [5. Throwing an explicit exception](#5-throwing-an-explicit-exception)
+      - [6. Generate an exception by Reference Error](#6-generate-an-exception-by-reference-error)
+      - [7. How to setup Express to catch unhandled exceptions (error-handling middleware)](#7-how-to-setup-express-to-catch-unhandled-exceptions-error-handling-middleware)
+      - [8. Check entries in Loggly](#8-check-entries-in-loggly)
+      - [9. Leveraging dynamic values from Apigee Vault or KVMs](#9-leveraging-dynamic-values-from-apigee-vault-or-kvms)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # tutorial-loggly-api-proxy
 This tutorial provides a reference architecture for enabling APIs with Logging by leveraging Log Management Services such as Loggly, Papertrail, Raygun, etc. Apigee provides Node.js Logs capabilities. However, this topic is out of the scope of this tutorial.
 
@@ -9,12 +26,17 @@ In the previous diagram, an API Proxy in Apigee leverages a Log Management solut
 We will be leveraging [apigeetool](https://www.npmjs.com/package/apigeetool) to bundle and deploy it to Apigee Edge. You'll need to sign up for a Free Apigee Edge account [here](https://accounts.apigee.com/accounts/sign_up).
 
 ```bash
-apigeetool deploynodeapp --username $ae_username --password $ae_password --organization testmyapi --api tutorial-loggly-api-proxy --environment test --directory . -m app.js -b /tutorial-loggly-api-proxy -U```
+apigeetool deploynodeapp --username $ae_username --password $ae_password --organization testmyapi --api tutorial-loggly-api-proxy --environment test --directory . -m app.js -b /tutorial-loggly-api-proxy -U
+```
 
-**This API proxy contains a dependency to a logger module, which can be resolved by following the recommendation from [this repo](https://github.com/llbeaninc/llbean-winston-logger), also note that -U flag will upload modules.**
+#### 2. Enabling llbean-winston-logger Module
+All steps included in this how-to-guide are standard to Winston configuration available [here](https://github.com/winstonjs/winston), including (Winston-Loggly)[https://github.com/winstonjs/winston-loggly], which is a Winston transporter for Loggly. So, there's nothing specific about Apigee to support it, except that Apigee requires importing Node.js Apps as Apigee API Proxy bundles, which is explained in How to deploy this API Proxy section.
 
-#### 2. Enabling Winston
-All steps included in this how-to-guide are standard to Winston configuration available [here](https://github.com/winstonjs/winston), including (Winston-Loggly)[https://github.com/winstonjs/winston-loggly], which a Winston transporter for Loggly. So, there's nothing specific about Apigee to support it, except that Apigee requires importing Node.js Apps as Apigee API Proxy bundles, which is explained in How to deploy this API Proxy section.
+Leverage llbean-winston-logger from a Node.js app by adding this dependency:
+```bash
+npm install llbean-winston-logger --save
+```
+**This API proxy contains a dependency to llbean-winstologger module, which can be resolved by following the recommendation from [this repo](https://github.com/llbeaninc/llbean-winston-logger), also note that -U flag will upload modules.**
 
 #### 3. Configurating config-logger.js
 config-logger.js contains transporters. In our case file, console, and loggly. More transporters can be added and configured using values from KVMs. See LOGGER_FILE_JSON. Notice that it is required a token in order to authenticate with Loggly. This token is included as part of the configuration. However, it can also be specified as a KVM entry. Please consult Loggly [official documentation](https://www.loggly.com/docs/customer-token-authentication-token/) for further information about retrieving customer token.
@@ -58,7 +80,7 @@ app.get('/pets', function(req, res){
 });
 ```
 
-```/pets?error=code_raised``` will raise an exception by explicitly throwing the exception and ```/pets?error=reference``` will raise a reference error.
+``` /pets?error=code_raised ``` will raise an exception by explicitly throwing the exception and ``` /pets?error=reference ``` will raise a reference error.
 
 #### 5. Throwing an explicit exception
 This exception is raised by the following code in /pets route.
