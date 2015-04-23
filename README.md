@@ -15,8 +15,8 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# tutorial-loggly-api-proxy
-This tutorial provides a reference architecture for enabling APIs with Logging by leveraging Log Management Services such as Loggly, Papertrail, Raygun, etc. Apigee provides Node.js Logs capabilities. However, this topic is out of the scope of this tutorial.
+# Api Proxies Logging push model with Cloud Vendors - Loggly
+This tutorial provides a reference architecture for enabling APIs with Logging push model by leveraging Log Management Services such as Loggly, Papertrail, Raygun, etc. As mentioned above, the model described in this guide is based on the PUSH or POST model, in which API Proxies directly push logs to the log management platform. Apigee also provides out-of-the-box Node.js Logs capabilities to temporarily save logs, which can be retrieved by third party solutions under PULL model. However, for the sake of keeping this guide tight, this topic is out of the scope of this tutorial. So, stay tuned to learn more about the pull model in a separate article. For more information about these models and log management in general, take a look at [Logging and Log Management](http://shop.oreilly.com/product/9781597496353.do).
 
 ![Log Management for Modern APIs](https://www.dropbox.com/s/70g4kiyde2nwwt4/Log%20Management%20for%20Modern%20APIs.png?dl=1)
 
@@ -38,7 +38,7 @@ npm install llbean-winston-logger --save
 ```
 **This API proxy contains a dependency to llbean-winstologger module, which can be resolved by following the recommendation from [this repo](https://github.com/llbeaninc/llbean-winston-logger), also note that -U flag will upload modules.**
 
-#### 3. Configurating config-logger.js
+#### 3. Configurating config-logger.js transports
 config-logger.js contains transporters. In our case file, console, and loggly. More transporters can be added and configured using values from KVMs. See LOGGER_FILE_JSON. Notice that it is required a token in order to authenticate with Loggly. This token is included as part of the configuration. However, it can also be specified as a KVM entry. Please consult Loggly [official documentation](https://www.loggly.com/docs/customer-token-authentication-token/) for further information about retrieving customer token.
 
 ```javascript
@@ -63,6 +63,8 @@ transports : [
               })
           ]
 ```
+
+__Note that you can declare multiple transporters. This provides the benefit of logging in multiple resources and apply different models (push or pull) to retrieve data from them, depending on the characteristics of requirements for logging.__
 
 #### 4. How to test it
 We will generate two types of exceptions. Custom and ReferenceError Exceptions. Use error parameter to raise this exception.
