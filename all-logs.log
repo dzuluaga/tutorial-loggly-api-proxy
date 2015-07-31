@@ -1,0 +1,26 @@
+2015-07-31T19:57:42.081Z - info: access to /pets resource
+2015-07-31T19:57:42.090Z - error: Error raised by an exception
+2015-07-31T19:57:42.095Z - error: messageid : LOCAL - Error: Error raised by an exception! - Error: Error raised by an exception!
+    at module.exports.getPets (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/lib/petsController.js:10:13)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:131:13)
+    at loadLogger (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/app.js:13:3)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/index.js:330:12)
+2015-07-31T19:57:53.521Z - info: access to /pets resource
+2015-07-31T19:57:53.523Z - error: Error raised by an exception
+2015-07-31T19:57:53.545Z - error: messageid : LOCAL - Error: Error raised by an exception! - Error: Error raised by an exception!
+    at module.exports.getPets (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/lib/petsController.js:10:13)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:131:13)
+    at loadLogger (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/app.js:13:3)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/ApigeeCorporation/Documents/tools/git/tutorial-loggly-api-proxy-dzuluaga/node_modules/express/lib/router/index.js:330:12)

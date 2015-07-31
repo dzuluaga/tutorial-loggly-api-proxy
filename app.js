@@ -7,7 +7,7 @@ var express = require('express'),
     config_logger = require('./config/config-logger.js');
 
 function loadLogger(req, res, next){
-  var logger = require('llbean-winston-logger');
+  var logger = require('./lib/logger');
   var logger = new logger(config_logger.getTransportOptions(req));
   res.locals.logger = logger;
   next();
