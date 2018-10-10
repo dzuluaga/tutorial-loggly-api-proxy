@@ -18,7 +18,7 @@
 # Api Proxies Logging push model with Cloud Vendors - Loggly
 This tutorial provides a reference architecture for enabling APIs with Logging push model by leveraging Log Management Services such as Loggly, Papertrail, Raygun, etc. As mentioned above, the model described in this guide is based on the PUSH or POST model, in which API Proxies directly push logs to the log management platform. Apigee also provides out-of-the-box Node.js Logs capabilities to temporarily save logs, which can be retrieved by third party solutions under PULL model. However, for the sake of keeping this guide tight, this topic is out of the scope of this tutorial. So, stay tuned to learn more about the pull model in a separate article. For more information about these models and log management in general, take a look at [Logging and Log Management](http://shop.oreilly.com/product/9781597496353.do).
 
-![Log Management for Modern APIs](https://www.dropbox.com/s/70g4kiyde2nwwt4/Log%20Management%20for%20Modern%20APIs.png?dl=1)
+![Log Management for Modern APIs](./images/Log_Management_for_Modern_APIs.png)
 
 In the previous diagram, an API Proxy in Apigee leverages a Log Management solution to log events. Apigee API Proxies can leverage standard Node.js libraries such as [Winston](https://github.com/winstonjs/winston) or [Bunyan](https://github.com/trentm/node-bunyan) to log entries in an async fashion, so there's little impact on latency.
 
