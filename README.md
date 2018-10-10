@@ -123,7 +123,7 @@ app.use(function(err, req, res, next) {
 #### 8. Check entries in Loggly
 All entries will be available through Loggly Dashboard. Log entries are searchable by tags and messageid.
 
-![Loggly Dashboard](https://www.dropbox.com/s/o9yd1zg7utcew5c/Loggly_Dashboard.png?dl=1)
+![Loggly Dashboard](./images/Loggly_Dashboard.png)
 
 #### 9. Leveraging dynamic values from Apigee Vault or KVMs
 The goal is to enable each API proxy with configuration that can be changed during runtime. In this way DevOps can switch configuration without having to redeploy the API proxy. For instance switching debug level from info to debug is a matter of switching the configuration from a common location such as an Apigee Vault or a KVM entry. These changes can be applied through the file /config/config-logger.js, e.g. ```"token": apigee.getVariable(req, 'LOGGER_LOGGLY_TOKEN') || "XXXXX-XXXXX-XXXX-XXXXX"```.
